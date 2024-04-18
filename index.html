@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>calculadora</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body> 
+    <div class="painel">
+        <h1 class="numero-painel" id="numero-painel">0</h1>
+    </div>
+    <div class="btns"> 
+        <div class="first-line">
+            <button class="gray">AC</button>
+            <button class="gray">+/-</button>
+            <button class="gray">%</button>
+            <button class="orange">/</button>
+        </div>
+        <div class="second-line">
+            <button class="dark-gray">7</button>
+            <button class="dark-gray">8</button>
+            <button class="dark-gray">9</button>
+            <button class="orange">*</button>
+        </div>
+        <div class="third-line">
+            <button class="dark-gray">4</button>
+            <button class="dark-gray">5</button>
+            <button class="dark-gray">6</button>
+            <button class="orange">-</button>
+        </div>
+        <div class="fourth-line">
+            <button class="dark-gray">1</button>
+            <button class="dark-gray">2</button>
+            <button class="dark-gray">3</button>
+            <button class="orange">+</button>
+        </div>
+        <div class="fifth-line">
+            <button class="dark-gray" style="width: 240px; text-align: left; padding-left: 40px;">0</button> 
+            <button class="dark-gray">,</button>
+            <button class="orange">=</button>
+        </div>     
+    </div>
+    <script>
+        const screenDisplay = document.querySelector('.painel');
+        const buttons = document.querySelectorAll('button');
+        const el = document.getElementById('numero-painel');
+
+        let numberClicked = 0;
+        let numbers = [];
+        let acumulative;
+
+        function calculate(button) {
+            numberClicked = button;
+            if(button === 'AC') {
+                el.innerHTML = '0';
+                numbers = [];
+            } else if(button === '=') {
+                el.innerHTML = eval(acumulative);
+            } else {
+                numbers.push(numberClicked);
+                acumulative = numbers.join('');
+                el.innerHTML = acumulative;
+            }
+        }
+
+        buttons.forEach(button => button.addEventListener('click', () => calculate(button.textContent)));
+    </script>
+</body>
+</html>
